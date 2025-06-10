@@ -41,7 +41,7 @@ test:
   requires:
     - pip
     - pytest
-    # To enable tests for py>312 need to rebuild split.
+    # To enable tests for py>312 need to rebuild splot.
     - splot  # [py<312]
 
 about:
