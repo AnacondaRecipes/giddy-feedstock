@@ -6,22 +6,20 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/giddy-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: a5da015ffb4bdc07794a14b6871cec39f6b948a3fea0fd030572bde154cb5af8
 
 build:
   number: 0
-  script_env:
-    - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   skip: true  # [py<311]
 
 requirements:
   host:
     - python
+    - pip
     - setuptools >=61.0
     - setuptools-scm >=6.2
-    - pip
   run:
     - python
     - esda >=2.7,<2.9
@@ -35,15 +33,14 @@ requirements:
 test:
   imports:
     - giddy
-  commands:
-    - pip check
-    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest --pyargs giddy.tests  # [py<312]
   requires:
     - pip
     - pytest
-    # To enable tests for py>312 need to rebuild splot.
-    - splot  # [py<312]
+    - splot
+  commands:
+    - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - pytest --pyargs giddy.tests
 
 about:
   home: https://pysal.org
