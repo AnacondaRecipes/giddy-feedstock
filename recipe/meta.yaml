@@ -1,5 +1,5 @@
 {% set name = "giddy" %}
-{% set version = "2.3.8" %}
+{% set version = "2.3.9" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: a5da015ffb4bdc07794a14b6871cec39f6b948a3fea0fd030572bde154cb5af8
+  sha256: f31d83a3fb9275cc07b71b28512d44626186373485063bf4f28a1990b9f7a2cb
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  skip: true  # [py<311]
+  skip: true  # [py<312]
 
 requirements:
   host:
@@ -22,11 +22,11 @@ requirements:
     - setuptools-scm >=6.2
   run:
     - python
-    - esda >=2.7,<2.9
+    - esda >=2.7,<3
     - libpysal >=4.12
     - mapclassify >=2.7
     - quantecon >=0.8
-    - scipy >=1.12
+    - scipy >=1.14
     - seaborn
     - matplotlib-base
 
